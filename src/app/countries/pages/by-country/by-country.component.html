@@ -1,0 +1,43 @@
+<h2>by country</h2>
+<hr>
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="search()" autocomplete="off" >
+            <input type="text"
+                name="query"
+                class="form-control"
+                [(ngModel)]="query"
+                placeholder="Search country">
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="isError" 
+    class="alert alert-danger">
+    Notihing find with this query {{ queryError }}
+</div>
+
+<div *ngIf="!isError" class="row">
+    <div class="col">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th> # </th>
+                    <th> Flag </th>
+                    <th> Name </th>
+                    <th> Population </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of countriesResult; index as i">
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="country.flags.png" alt="" class="card-img mx-auto w-25"></td>
+                    <td>{{ country.name.common }}</td>
+                    <td>{{ country.population |  number:'1.0' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
